@@ -5,7 +5,8 @@ This repo contains PyTorch code for the ICCV19' paper: Deep Meta Metric Learning
 - Python 3.6+
 - PyTorch 0.4
 - tensorboardX 1.6
-To install all python packages please run the following command:
+
+To install all python packages, please run the following command:
 ```
 pip install -r requirements.txt
 ```
