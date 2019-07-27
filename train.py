@@ -83,7 +83,7 @@ def train(args, model, optimizer, criterion, gids=None):
         if epoch % 10 == 0:
             dataloader = make_dataloader(args, epoch)
         print('=== Epoch {}/{} ==='.format(epoch, args.num_epochs))
-        adjust_lr_exp(optimizer, args.lr, args.lr_coeff, epoch+1, args.num_epochs, args.lr_decay_start_epoch)
+        adjust_lr_exp(optimizer, args.lr, epoch+1, args.num_epochs, args.lr_decay_start_epoch)
 
         for iteration, (image, label) in enumerate(dataloader):
             if args.cuda:
