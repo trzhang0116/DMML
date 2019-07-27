@@ -1,0 +1,24 @@
+python train.py \
+--dataset='market1501' \
+--dataset_root='/home/cgy/server_223/Dataset/Market-1501-v15.09.15' \
+--exp_root='./exp/dmml/market1501' \
+--loss_type='dmml' \
+--alpha=0.5 \
+--lr=2e-4 \
+--lr_coeff=1e-3 \
+--num_epochs=1200 \
+--lr_decay_start_epoch=600 \
+--weight_decay=1e-4 \
+--num_classes=32 \
+--distance_mode='hard_mining' \
+--num_support=5 \
+--num_query=1 \
+--margin=0.4 \
+--img_height=256 \
+--img_width=128 \
+--num_workers=8 \
+--gpu='0, 1' \
+--manual_seed=7 \
+--random_erasing \
+--remove_downsample \
+--cuda
