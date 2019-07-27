@@ -55,7 +55,7 @@ def make_model(args, gids=None):
     return model    
 
 
-def adjust_lr_exp(optimizer, base_lr1, base_lr2, epoch, num_epochs, decay_start_epoch):
+def adjust_lr_exp(optimizer, base_lr, epoch, num_epochs, decay_start_epoch):
     """
     Adjust learning rate exponentially from a given epoch to the end of training.
     """
@@ -64,12 +64,8 @@ def adjust_lr_exp(optimizer, base_lr1, base_lr2, epoch, num_epochs, decay_start_
     if epoch < decay_start_epoch:
         return
     for g in optimizer.param_groups:
-        if g['weight_decay'] > 1e-6:
-            g['lr'] = base_lr1 * (0.005 ** (float(epoch + 1 - decay_start_epoch)
-                                            / (num_epochs + 1 - decay_start_epoch)))
-        else:
-            g['lr'] = base_lr2 * (0.005 ** (float(epoch + 1 - decay_start_epoch)
-                                            / (num_epochs + 1 - decay_start_epoch)))
+        g['lr'] = base_lr * (0.005 ** (float(epoch + 1 - decay_start_epoch)
+                                        / (num_epochs + 1 - decay_start_epoch)))
     print('=====> lr adjusted to {:.9f}'.format(g['lr']).rstrip('0'))
 
 
@@ -131,7 +127,7 @@ def train(args, model, optimizer, criterion, gids=None):
             else:
                 torch.save(model.state_dict(), model_save_path)
             print('Model {} saved.'.format(epoch))
-            
+
             eval(gid=gids[0], dataset=args.dataset, which=epoch, exp_dir=args.exp_root)
 
     model_save_path = os.path.join(args.exp_root, 'model_last.pth'.format(epoch))
@@ -168,12 +164,12 @@ def main():
     print('Loss: {}'.format(args.loss_type))
     if args.loss_type == 'softmax-triplet':
         print('  alpha: {}'.format(args.alpha))
-    if args.loss_type in ['contrastive', 'triplet', 'dmml', 'dmml-learnable']:
+    if args.loss_type in ['contrastive', 'triplet', 'dmml']:
         print('  margin: {}'.format(args.margin))
     print('  class number: {}'.format(args.num_classes))
     if args.loss_type == 'npair':
         pass
-    elif 'dmml' in args.loss_type:
+    elif args.loss_type == 'dmml':
         print('  support number: {}'.format(args.num_support))
         print('  query number: {}'.format(args.num_query))
         print('  distance_mode: {}'.format(args.distance_mode))

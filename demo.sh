@@ -5,7 +5,6 @@ python train.py \
 --loss_type='dmml' \
 --alpha=0.5 \
 --lr=2e-4 \
---lr_coeff=1e-3 \
 --num_epochs=1200 \
 --lr_decay_start_epoch=600 \
 --weight_decay=1e-4 \
