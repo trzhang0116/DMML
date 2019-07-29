@@ -12,8 +12,8 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-- Market-1501 dataset can be downloaded from [here](www.liangzheng.org/Project/project_reid.html).
-- DukeMTMC-reID dataset can be downloaded from [here](vision.cs.duke.edu/DukeMTMC/).
+- Market-1501 dataset can be downloaded from [here](https://www.liangzheng.org/Project/project_reid.html).
+- DukeMTMC-reID dataset can be downloaded from [here](https://vision.cs.duke.edu/DukeMTMC/).
 
 ## Usage
 ### Training
