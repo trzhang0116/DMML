@@ -120,15 +120,13 @@ def train(args, model, optimizer, criterion, gids=None):
         t = int(time.time())
         print('Time elapsed: {}h {}m'.format((t - t0) // 3600, ((t - t0) % 3600) // 60))
 
-        if epoch % 40 == 0 and epoch >= args.num_epochs // 2:
+        if epoch % 100 == 0 and epoch >= args.num_epochs // 2:
             model_save_path = os.path.join(args.exp_root, 'model_{}.pth'.format(epoch))
             if gids is not None and len(gids) > 1:
                 torch.save(model.module.state_dict(), model_save_path)
             else:
                 torch.save(model.state_dict(), model_save_path)
             print('Model {} saved.'.format(epoch))
-
-            eval(gid=gids[0], dataset=args.dataset, which=epoch, exp_dir=args.exp_root)
 
     model_save_path = os.path.join(args.exp_root, 'model_last.pth'.format(epoch))
     if gids is not None and len(gids) > 1:
@@ -139,7 +137,7 @@ def train(args, model, optimizer, criterion, gids=None):
 
     tb.close()
 
-    eval(gid=gids[0], dataset=args.dataset, which='last', exp_dir=args.exp_root)
+    eval(gid=gids[0], dataset=args.dataset, dataset_root=args.dataset_root, which='last', exp_dir=args.exp_root)
 
 
 def main():

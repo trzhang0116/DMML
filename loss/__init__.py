@@ -2,13 +2,8 @@ from torch.nn import CrossEntropyLoss
 from loss.contrastive import ContrastiveLoss
 from loss.triplet import TripletLoss
 from loss.npair import NpairLoss
-from loss.dmml import DMMLLoss
-
-from loss.dmml import LearnableDMMLLoss
-
-from loss.center import CenterLoss
 from loss.lifted import LiftedLoss
-from loss.proxy_nca import ProxyNCALoss, ProxyNCAUnstable
+from loss.dmml import DMMLLoss
 
 
 def make_loss(args, gids):
@@ -27,11 +22,11 @@ def make_loss(args, gids):
                      'triplet': TripletLoss(margin=args.margin)}
     elif args.loss_type == 'npair':
         criterion = NpairLoss(reg_lambda=0.002, gid=gid)
+    elif args.loss_type == 'lifted':
+        criterion = LiftedLoss(margin=args.margin, gid=gid)
     elif args.loss_type == 'dmml':
         criterion = DMMLLoss(num_support=args.num_support, distance_mode=args.distance_mode,
                              margin=args.margin, gid=gid)
-    elif args.loss_type == 'lifted':
-        criterion = LiftedLoss(margin=args.margin, gid=gid)
     else:
         raise NotImplementedError
 

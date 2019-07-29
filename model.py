@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 
 from torchvision import models
-from inception import inception_v3
 
 
 class resnet_model(nn.Module):

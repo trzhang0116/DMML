@@ -71,8 +71,8 @@ class DMMLLoss(nn.Module):
 
         dmml_loss = -log_prob.gather(2, target_inds).squeeze().view(-1).mean()
 
-        # batch_size = feature.size(0)
-        # l2_loss = torch.sum(feature ** 2) / batch_size
-        # dmml_loss += 0.002 * 0.25 * l2_loss
+        batch_size = feature.size(0)
+        l2_loss = torch.sum(feature ** 2) / batch_size
+        dmml_loss += 0.002 * 0.25 * l2_loss
 
         return dmml_loss

@@ -17,25 +17,16 @@ def make_dataloader(args, epoch=0):
     Args:
         epoch: current epoch number, used in random erasing data augmentation.
     """
-    if args.dataset == 'cub200':
-        train_list = [
-            transforms.Resize((256, 256), interpolation=3),
-            transforms.RandomCrop((args.img_height, args.img_width)),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
-        ]
-    else:
-        train_list = [
-            transforms.Resize((args.img_height, args.img_width), interpolation=3),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ]
-        if args.random_erasing and args.dataset in ['market1501', 'duke', 'cuhk03_labeled', 'cuhk03_detected']:
-            probability = 0.2 + 0.3*min((float(epoch)/args.num_epochs), 0.8)
-            s_epoch = 0.1 + 0.2*min((float(epoch)/args.num_epochs), 0.8)
-            train_list.append(RandomErasing(probability=probability, s_epoch=s_epoch, mean=[0.0, 0.0, 0.0]))
+    train_list = [
+        transforms.Resize((args.img_height, args.img_width), interpolation=3),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ]
+    if args.random_erasing:
+        probability = 0.3 + 0.4*min((float(epoch)/args.num_epochs), 0.8)
+        s_epoch = 0.1 + 0.3*min((float(epoch)/args.num_epochs), 0.8)
+        train_list.append(RandomErasing(probability=probability, s_epoch=s_epoch, mean=[0.0, 0.0, 0.0]))
     train_transform = transforms.Compose(train_list)
 
     batch_m = args.num_classes

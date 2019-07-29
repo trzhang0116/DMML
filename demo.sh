@@ -1,9 +1,7 @@
 python train.py \
 --dataset='market1501' \
---dataset_root='/home/cgy/server_223/Dataset/Market-1501-v15.09.15' \
+--dataset_root='<DATASET_ROOT>' \
 --exp_root='./exp/dmml/market1501' \
---loss_type='dmml' \
---alpha=0.5 \
 --lr=2e-4 \
 --num_epochs=1200 \
 --lr_decay_start_epoch=600 \
@@ -17,7 +15,6 @@ python train.py \
 --img_width=128 \
 --num_workers=8 \
 --gpu='0, 1' \
---manual_seed=7 \
 --random_erasing \
 --remove_downsample \
 --cuda

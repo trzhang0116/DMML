@@ -8,19 +8,13 @@ def get_parser():
     
     parser.add_argument('--dataset',
                         type=str,
-                        help='dataset name, which can be chosen from \'market1501\',\
-                        \'duke\' and \'veri776\'',
+                        help='dataset name, which can be chosen from \'market1501\' and \'duke\'',
                         default='market1501')
 
     parser.add_argument('--dataset_root',
                         type=str,
                         help='dataset path',
                         default='../dataset')
-
-    parser.add_argument('--dataset_file',
-                        type=str,
-                        help='.csv file for VeRi-776 dataset',
-                        default='VeRi_train.csv')
 
     parser.add_argument('--exp_root',
                         type=str,
@@ -30,27 +24,22 @@ def get_parser():
     parser.add_argument('--num_epochs',
                         type=int,
                         help='number of training epochs',
-                        default=600)
+                        default=1200)
 
     parser.add_argument('--lr',
                         type=float,
                         help='learning rate',
-                        default=1e-3)
+                        default=2e-4)
 
     parser.add_argument('--lr_decay_start_epoch',
                         type=int,
                         help='epoch from when learning rate starts to decay exponentially',
-                        default=300)
+                        default=600)
 
     parser.add_argument('--weight_decay',
                         type=float,
                         help='L2 weight decay',
-                        default=0)
-
-    parser.add_argument('--lr_coeff',
-                        type=float,
-                        help='learning rate of learnable coefficients for DMML-learnable loss',
-                        default=1e-3)
+                        default=1e-4)
 
     parser.add_argument('--num_classes',
                         type=int,
@@ -59,12 +48,12 @@ def get_parser():
 
     parser.add_argument('--num_support',
                         type=int,
-                        help='number of support samples per class (only for DMML)',
+                        help='number of support samples per class (for DMML)',
                         default=5)
 
     parser.add_argument('--num_query',
                         type=int,
-                        help='number of query samples per class (only for DMML)',
+                        help='number of query samples per class (for DMML)',
                         default=1)
 
     parser.add_argument('--num_instances',
@@ -80,8 +69,8 @@ def get_parser():
 
     parser.add_argument('--margin',
                         type=float_or_string,
-                        help='margin for contrastive loss, triplet loss or DMML loss',
-                        default=0)
+                        help='margin parameter for contrastive loss, triplet loss or DMML loss',
+                        default=.0)
 
     parser.add_argument('--img_height',
                         type=int,

@@ -13,22 +13,22 @@ from model import resnet_model
 from utils import get_id, flip_img, compute_map
 
 
-def eval(gid, dataset, which, exp_dir):
-    mAP, CMC = main(gid=gid, dataset=dataset, which=which, exp_dir=exp_dir, verbose=False)
+def eval(gid, dataset, dataset_root, which, exp_dir):
+    mAP, CMC = main(gid=gid, dataset=dataset, dataset_root=dataset_root, which=which, exp_dir=exp_dir, verbose=False)
     return mAP, CMC
 
 
-def main(gid=None, dataset=None, which=None, exp_dir=None, verbose=False):
+def main(gid=None, dataset=None, dataset_root=None, which=None, exp_dir=None, verbose=False):
     """
     Configs
     """
-    GPU_ID = 3  # gpu id or 'None'
-    BATCH_SIZE = 64  # batch size when extracting query and gallery features
+    GPU_ID = 0                         # gpu id or 'None'
+    BATCH_SIZE = 32                    # batch size when extracting query and gallery features
     IMG_SIZE = (256, 128)
-    DATASET = 'market1501'  # market1501, duke
-    WHICH = 'last'  # which model to load
+    DATASET = 'market1501'             # market1501, duke
+    WHICH = 'last'                     # which model to load
     EXP_DIR = './exp/dmml/market1501'
-    NORMALIZE_FEATURE = True  # whether to normalize features in evaluation
+    NORMALIZE_FEATURE = True           # whether to normalize features in evaluation
     NUM_WORKERS = 8
 
     if gid is not None:
@@ -43,13 +43,14 @@ def main(gid=None, dataset=None, which=None, exp_dir=None, verbose=False):
     """
     Datasets
     """
-    # change dataset directories here to your own
-    if DATASET == 'market1501':
-        dataset_root = '/home/cgy/server_223/Dataset/Market-1501-v15.09.15'
-    elif DATASET == 'duke':
-        dataset_root = '/home/cgy/server_223/Dataset/duke/DukeMTMC-reID'
-    else:
-        raise NotImplementedError
+    if dataset_root is None:
+        # change dataset directories here to your own if needed
+        if DATASET == 'market1501':
+            dataset_root = '<DATASET_ROOT_MARKET>'
+        elif DATASET == 'duke':
+            dataset_root = '<DATASET_ROOT_DUKE>'
+        else:
+            raise NotImplementedError
 
     print('Generating dataset...')
     eval_transform = transforms.Compose([transforms.Resize(IMG_SIZE, interpolation=3),

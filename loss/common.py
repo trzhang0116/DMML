@@ -36,8 +36,8 @@ def cosine_dist(x, y):
 
     x = x.unsqueeze(1).expand(n, m, d)
     y = y.unsqueeze(0).expand(n, m, d)
-    dist = -torch.mul(x, y).sum(2) / torch.clamp(torch.mul(torch.norm(x, p=2, dim=2), torch.norm(y, p=2, dim=2)), min=1e-6)
-    # dist = -torch.mul(x, y).sum(2)
+    # dist = -torch.mul(x, y).sum(2) / torch.clamp(torch.mul(torch.norm(x, p=2, dim=2), torch.norm(y, p=2, dim=2)), min=1e-6)
+    dist = -torch.mul(x, y).sum(2)
 
     return dist
 
