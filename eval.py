@@ -44,11 +44,10 @@ def main(gid=None, dataset=None, dataset_root=None, which=None, exp_dir=None, ve
     Datasets
     """
     if dataset_root is None:
-        # change dataset directories here to your own if needed
         if DATASET == 'market1501':
-            dataset_root = '<DATASET_ROOT_MARKET>'
+            dataset_root = './datasets/market1501'
         elif DATASET == 'duke':
-            dataset_root = '<DATASET_ROOT_DUKE>'
+            dataset_root = './datasets/duke'
         else:
             raise NotImplementedError
 
