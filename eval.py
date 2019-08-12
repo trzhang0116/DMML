@@ -79,7 +79,7 @@ def main(gid=None, dataset=None, dataset_root=None, which=None, exp_dir=None, ve
     model = resnet_model(remove_downsample=True)
     # model = resnet_model(num_classes=num_classes, include_top=False, remove_downsample=False)
     
-    model.load_state_dict(torch.load('{}/model_{}.pth'.format(EXP_DIR, WHICH)))
+    model.load_state_dict(torch.load('{}/model_{}.pth'.format(EXP_DIR, WHICH)), strict=False)
     if GPU_ID is not None:
         model.cuda(GPU_ID)
     model.eval()
