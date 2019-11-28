@@ -42,10 +42,14 @@ python eval.py
 ```
 which will output Rank-1, Rank-5, Rank-10 and mAP scores.
 
+## Trained models
+
+[BaiduYun](https://pan.baidu.com/s/1ZaVjg3L-tmoEGu_WGC3xDQ) with extraction code: grb4.
+
 ## Citation
 Please use the citation provided below if it is useful to your research:
 
-Guangyi Chen, Tianren Zhang, Jiwen Lu, and Jie Zhou. Deep Meta Metric Learning. ICCV, 2019.
+Guangyi Chen, Tianren Zhang, Jiwen Lu, and Jie Zhou. Deep meta metric learning. In *ICCV*, 2019.
 ```
 @inproceedings{chen2019deep,
   title={Deep meta metric learning},
